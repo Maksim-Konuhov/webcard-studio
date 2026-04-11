@@ -66,6 +66,21 @@ nav {
 }
 .nav-links a:hover { color: var(--text); }
 
+.nav-ilya {
+  background: linear-gradient(135deg, #7a4f00, #c8960c) !important;
+  color: #fff !important;
+  padding: .55rem 1.4rem;
+  border-radius: 50px;
+  font-weight: 600 !important;
+  transition: opacity .2s, transform .2s, box-shadow .2s !important;
+  box-shadow: 0 0 16px rgba(200,150,12,.3);
+}
+.nav-ilya:hover {
+  opacity: .88 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 24px rgba(200,150,12,.45) !important;
+}
+
 .nav-cta {
   background: linear-gradient(135deg, var(--accent1), var(--accent2));
   color: #fff !important;

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Илья Малинин — Квад Бог</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #0b0700;
+      --bg2:       #160e02;
+      --card:      #1e1304;
+      --card2:     #261a07;
+      --gold:      #c8960c;
+      --gold-lt:   #f0c84a;
+      --gold-dim:  #7a5c08;
+      --gold-glow: rgba(200,150,12,.3);
+      --text:      #f5e8c0;
+      --muted:     #b8965a;
+      --border:    rgba(200,150,12,.15);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6vw;
+      background: rgba(11,7,0,.75);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: .5rem;
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; font-weight: 400; letter-spacing: .05em;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--gold-lt); }
+    .nav-back svg { transition: transform .2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 6vw 80px;
+      overflow: hidden;
+    }
+
+    /* radial gold glow */
+    .hero-glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,150,12,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 30% 20%, rgba(200,150,12,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* gold particles */
+    .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .particle {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: var(--gold-lt);
+      animation: float-up linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float-up {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: .8; }
+      90%  { opacity: .3; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    .hero-eyebrow {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: .8rem;
+      color: var(--gold); font-size: .8rem; font-weight: 400;
+      letter-spacing: .3em; text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fade-up .8s ease both;
+    }
+    .hero-eyebrow-line {
+      display: block; width: 40px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .hero-eyebrow-line.r {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    h1 {
+      position: relative; z-index: 1;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.02em;
+      animation: fade-up .9s .1s ease both;
+    }
+    h1 .name-gold {
+      background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 40%, var(--gold-lt) 60%, var(--gold) 80%, var(--gold-dim) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      from { background-position: 0% center; }
+      to   { background-position: 200% center; }
+    }
+
+    .hero-sub {
+      position: relative; z-index: 1;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic; color: var(--muted);
+      margin-top: 1.5rem; line-height: 1.6;
+      animation: fade-up 1s .2s ease both;
+    }
+
+    .hero-badge-row {
+      position: relative; z-index: 1;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      justify-content: center; margin-top: 2.5rem;
+      animation: fade-up 1s .35s ease both;
+    }
+    .hero-badge {
+      padding: .45rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: .78rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(200,150,12,.06);
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: .5rem;
+      color: var(--gold-dim); font-size: .7rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      z-index: 1; animation: fade-up 1s .7s ease both;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scroll-down 2s ease infinite;
+    }
+    @keyframes scroll-down {
+      0%  { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100%{ transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── DIVIDER ── */
+    .gold-divider {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin: 0 auto 3rem;
+      max-width: 300px;
+    }
+    .gold-divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .gold-divider-diamond {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 6vw; position: relative; z-index: 1; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .72rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .section-eyebrow::before, .section-eyebrow::after {
+      content: ''; display: block; height: 1px; width: 20px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      margin-top: 4rem;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+    }
+    .about-photo-frame {
+      position: relative; border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: linear-gradient(145deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+    }
+    /* decorative skater silhouette */
+    .about-photo-frame::before {
+      content: '⛸';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem; opacity: .05;
+      filter: blur(2px);
+    }
+    .about-photo-inner {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(200,150,12,.2) 0%, transparent 60%),
+        linear-gradient(160deg, rgba(200,150,12,.05) 0%, transparent 50%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-photo-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      opacity: .35;
+      line-height: 1;
+    }
+    /* gold corner decorations */
+    .corner {
+      position: absolute; width: 30px; height: 30px;
+    }
+    .corner-tl { top: -1px; left: -1px;
+      border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-tr { top: -1px; right: -1px;
+      border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .corner-bl { bottom: -1px; left: -1px;
+      border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-br { bottom: -1px; right: -1px;
+      border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+    .about-photo-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.5rem 1.2rem;
+      background: linear-gradient(to top, rgba(11,7,0,.9), transparent);
+      font-size: .8rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    /* floating badge */
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 0 40px rgba(200,150,12,.4);
+      border: 3px solid var(--bg);
+    }
+    .about-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: #0b0700;
+      line-height: 1;
+    }
+    .about-badge-label {
+      font-size: .55rem; letter-spacing: .1em;
+      text-transform: uppercase; color: #0b0700;
+      text-align: center; margin-top: .2rem;
+    }
+
+    .about-text p {
+      font-size: 1.1rem; line-height: 1.9;
+      color: var(--muted); margin-bottom: 1.4rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+
+    .about-facts {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .fact-item {
+      padding: 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .fact-item:hover {
+      border-color: rgba(200,150,12,.4);
+      box-shadow: 0 0 20px rgba(200,150,12,.08);
+    }
+    .fact-label {
+      font-size: .68rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .4rem;
+    }
+    .fact-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--text);
+    }
+
+    /* ── RECORDS / TIMELINE ── */
+    #records { background: var(--bg); }
+
+    .records-intro { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-top: .8rem; max-width: 55ch; }
+
+    .timeline { margin-top: 4rem; position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 28px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), var(--gold-dim), transparent);
+    }
+
+    .tl-item {
+      display: flex; gap: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .tl-dot-wrap {
+      flex-shrink: 0; width: 56px;
+      display: flex; justify-content: center;
+    }
+    .tl-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 4px rgba(200,150,12,.15);
+      margin-top: .35rem;
+      transition: background .3s, box-shadow .3s;
+    }
+    .tl-item:hover .tl-dot {
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(200,150,12,.25), 0 0 20px rgba(200,150,12,.4);
+    }
+    .tl-content {
+      flex: 1;
+      padding: 1.8rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .tl-item:hover .tl-content {
+      border-color: rgba(200,150,12,.35);
+      box-shadow: 0 8px 40px rgba(0,0,0,.3);
+    }
+    .tl-year {
+      font-size: .72rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .6rem;
+    }
+    .tl-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .tl-desc { font-size: .95rem; color: var(--muted); line-height: 1.7; }
+    .tl-medal {
+      display: inline-flex; align-items: center; gap: .4rem;
+      margin-top: .8rem;
+      padding: .3rem .8rem;
+      border-radius: 50px; font-size: .72rem;
+      font-weight: 600; letter-spacing: .06em;
+    }
+    .medal-gold { background: rgba(200,150,12,.15); color: var(--gold); border: 1px solid rgba(200,150,12,.3); }
+    .medal-record { background: rgba(200,25,92,.1); color: #e0446a; border: 1px solid rgba(200,25,92,.25); }
+
+    /* ── JUMPS ── */
+    #jumps { background: var(--bg2); }
+
+    .jumps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; margin-top: 4rem;
+    }
+
+    .jump-card {
+      position: relative;
+      padding: 2.5rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .jump-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200,150,12,.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px rgba(200,150,12,.1);
+    }
+    .jump-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top, rgba(200,150,12,.08), transparent 60%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .jump-card:hover::before { opacity: 1; }
+
+    .jump-symbol {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: .5rem;
+    }
+    .jump-name {
+      font-size: .78rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .8rem;
+    }
+    .jump-full {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 600; color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .jump-note { font-size: .82rem; color: var(--gold-dim); font-style: italic; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--bg); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem; margin-top: 3rem;
+    }
+
+    .gallery-item {
+      position: relative; overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+
+    .gallery-inner {
+      width: 100%; padding-bottom: 75%;
+      position: relative;
+      background: var(--card2);
+    }
+    .gallery-item:nth-child(1) .gallery-inner { padding-bottom: 60%; }
+    .gallery-item:nth-child(4) .gallery-inner { padding-bottom: 40%; }
+
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,7,0,.85) 0%, transparent 50%);
+      display: flex; align-items: flex-end;
+      padding: 1.5rem;
+      opacity: 0; transition: opacity .3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-caption {
+      font-size: .85rem; letter-spacing: .08em;
+      color: var(--gold-lt);
+    }
+
+    /* decorative ice-rink patterns inside gallery placeholders */
+    .gallery-deco {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .gallery-deco-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: rgba(200,150,12,.06);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .gallery-deco-icon {
+      position: absolute;
+      font-size: 4rem;
+      opacity: .04;
+    }
+    .gallery-glow {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); pointer-events: none;
+    }
+    .gg1 { width: 200px; height: 200px; background: rgba(200,150,12,.15); top: -50px; right: -50px; }
+    .gg2 { width: 150px; height: 150px; background: rgba(200,25,92,.1); bottom: -30px; left: -30px; }
+
+    /* ── QUOTE ── */
+    #quote {
+      background: var(--bg2);
+      text-align: center;
+      padding: 80px 6vw;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      font-weight: 400; font-style: italic;
+      line-height: 1.4;
+      max-width: 18ch; margin: 0 auto 2rem;
+      position: relative; z-index: 1;
+    }
+    .quote-text::before { content: '\201C'; color: var(--gold); }
+    .quote-text::after  { content: '\201D'; color: var(--gold); }
+    .quote-mark {
+      font-size: 8rem; line-height: 0;
+      color: rgba(200,150,12,.08);
+      font-family: 'Playfair Display', serif;
+      position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+    }
+    .quote-author {
+      font-size: .8rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ── STATS ── */
+    #stats { background: var(--bg); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px; margin-top: 4rem;
+      border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden;
+    }
+    .stat-item {
+      padding: 2.5rem 2rem; text-align: center;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      transition: background .3s;
+      position: relative; overflow: hidden;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at bottom, rgba(200,150,12,.06), transparent 60%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .stat-item:hover::before { opacity: 1; }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 900; line-height: 1;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: .5rem;
+    }
+    .stat-lbl {
+      font-size: .75rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 6vw;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .footer-copy { font-size: .82rem; color: var(--gold-dim); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(4) { grid-column: span 2; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 480px) {
+      .about-facts { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .jumps-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">WebCard<span style="color:#c8195c;">.</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    На главную
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-eyebrow">
+    <span class="hero-eyebrow-line"></span>
+    Фигурное катание
+    <span class="hero-eyebrow-line r"></span>
+  </div>
+
+  <h1>
+    <span class="name-gold">Илья</span><br>
+    Малинин
+  </h1>
+
+  <p class="hero-sub">«Квад Бог» · Первый человек в истории,<br>исполнивший четверной аксель в соревнованиях</p>
+
+  <div class="hero-badge-row">
+    <span class="hero-badge">Чемпион Мира 2024</span>
+    <span class="hero-badge">Чемпион США 2024</span>
+    <span class="hero-badge">5 видов квадов</span>
+    <span class="hero-badge">4A — мировой рекорд</span>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">Биография</div>
+  <h2 class="section-title reveal">О <em>легенде</em> льда</h2>
+
+  <div class="about-grid">
+    <div class="about-photo-wrap reveal">
+      <div class="about-photo-frame">
+        <div class="about-photo-inner">
+          <div class="about-photo-number">4A</div>
+        </div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        <div class="about-photo-caption">Илья Малинин · США</div>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">#1</div>
+        <div class="about-badge-label">Мировой<br>рейтинг</div>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <div class="gold-divider" style="margin: 0 0 2rem;">
+        <div class="gold-divider-line"></div>
+        <div class="gold-divider-diamond"></div>
+        <div class="gold-divider-line"></div>
+      </div>
+
+      <p><strong>Илья Малинин</strong> — американский фигурист российского происхождения, родившийся 2 декабря 2004 года в Фэрфаксе, Вирджиния. Сын двух профессиональных фигуристов — Татьяны Малининой и Романа Малинина — Илья буквально вырос на льду.</p>
+      <p>14 сентября <strong>2022 года</strong> он вошёл в историю спорта, первым в мире исполнив <strong>четверной аксель</strong> на официальных соревнованиях. Этот прыжок — сложнейший в фигурном катании — покорился только ему. Именно тогда появилось его прозвище: <em>«Квад Бог»</em>.</p>
+      <p>В сезоне 2023–24 Малинин достиг вершины, завоевав титулы <strong>Чемпиона мира</strong> и <strong>Чемпиона США</strong>, установив при этом новые рекорды по технической базовой стоимости программ.</p>
+
+      <div class="about-facts">
+        <div class="fact-item">
+          <div class="fact-label">Дата рождения</div>
+          <div class="fact-value">2 декабря 2004</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Гражданство</div>
+          <div class="fact-value">США / Россия</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Тренеры</div>
+          <div class="fact-value">Родители</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Клуб</div>
+          <div class="fact-value">Skating Club of NY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECORDS -->
+<section id="records">
+  <div class="section-eyebrow">Достижения</div>
+  <h2 class="section-title reveal">Путь к <em>величию</em></h2>
+  <p class="records-intro reveal">Каждый сезон — новая страница истории фигурного катания.</p>
+
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">14 сентября 2022</div>
+        <div class="tl-title">Первый четверной аксель в истории</div>
+        <div class="tl-desc">На турнире CS Challenger Series в Лейк-Плэсиде Малинин исполнил 4A — прыжок, который до него никто не приземлял на официальных соревнованиях. Прыжок оценён судьями и вошёл в Книгу рекордов Гиннесса.</div>
+        <span class="tl-medal medal-record">🏆 Мировой рекорд</span>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">Декабрь 2022</div>
+        <div class="tl-title">Финал Гран-при — победа</div>
+        <div class="tl-desc">В возрасте 18 лет стал победителем Финала Гран-при ISU, опередив всех соперников по суммарным баллам. Один из самых молодых победителей в истории турнира.</div>
+        <span class="tl-medal medal-gold">🥇 Золото</span>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">Январь 2024</div>
+        <div class="tl-title">Чемпион США</div>
+        <div class="tl-desc">Завоевал национальный титул с рекордной суммой баллов, исполнив в произвольной программе четверной аксель, четверной лутц, четверной флип, четверной тулуп и четверной сальхов.</div>
+        <span class="tl-medal medal-gold">🥇 Золото · Национальный чемпионат</span>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">Март 2024</div>
+        <div class="tl-title">Чемпион мира — Монреаль</div>
+        <div class="tl-desc">На чемпионате мира в Монреале Илья Малинин завоевал золото, доказав всему миру, что он — лучший одиночник планеты. Произвольная программа оценена одним из самых высоких баллов в истории ISU.</div>
+        <span class="tl-medal medal-gold">🥇 Золото · Чемпионат Мира ISU</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JUMPS -->
+<section id="jumps">
+  <div class="section-eyebrow">Прыжки</div>
+  <h2 class="section-title reveal">Пять <em>четверных</em></h2>
+  <p class="records-intro reveal" style="margin-top:.8rem;">Единственный фигурист, освоивший все пять видов четверных прыжков в соревнованиях.</p>
+
+  <div class="jumps-grid">
+    <div class="jump-card reveal">
+      <div class="jump-symbol">4A</div>
+      <div class="jump-name">Квад Аксель</div>
+      <div class="jump-full">Четверной аксель</div>
+      <div class="jump-note">Мировая история · 2022</div>
+    </div>
+    <div class="jump-card reveal">
+      <div class="jump-symbol">4Lz</div>
+      <div class="jump-name">Квад Лутц</div>
+      <div class="jump-full">Четверной лутц</div>
+      <div class="jump-note">Один из сложнейших</div>
+    </div>
+    <div class="jump-card reveal">
+      <div class="jump-symbol">4F</div>
+      <div class="jump-name">Квад Флип</div>
+      <div class="jump-full">Четверной флип</div>
+      <div class="jump-note">Редкий прыжок</div>
+    </div>
+    <div class="jump-card reveal">
+      <div class="jump-symbol">4Lo</div>
+      <div class="jump-name">Квад Лупп</div>
+      <div class="jump-full">Четверной риттбергер</div>
+      <div class="jump-note">Уникальная техника</div>
+    </div>
+    <div class="jump-card reveal">
+      <div class="jump-symbol">4T</div>
+      <div class="jump-name">Квад Тулуп</div>
+      <div class="jump-full">Четверной тулуп</div>
+      <div class="jump-note">Базовый для программ</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-eyebrow">Галерея</div>
+  <h2 class="section-title reveal">Моменты <em>триумфа</em></h2>
+
+  <div class="gallery-grid">
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-glow gg1"></div>
+        <div class="gallery-glow gg2"></div>
+        <div class="gallery-deco">
+          <div class="gallery-deco-text" style="font-size:12rem;opacity:.04">4A</div>
+          <div class="gallery-deco-icon" style="top:20%;right:15%">⛸</div>
+        </div>
+        <div style="position:absolute;bottom:1.5rem;left:1.5rem;z-index:1;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);">Чемпион Мира</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:.3rem;">Монреаль · 2024</div>
+        </div>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-caption">Первое золото чемпионата мира</div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-glow gg1" style="background:rgba(200,25,92,.12)"></div>
+        <div class="gallery-deco">
+          <div class="gallery-deco-text" style="font-size:7rem;">ISU</div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-caption">Гран-при · 2022–23</div></div>
+    </div>
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-glow gg2" style="background:rgba(200,150,12,.12)"></div>
+        <div class="gallery-deco">
+          <div class="gallery-deco-text" style="font-size:5rem;color:rgba(200,150,12,.07)">USA</div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-caption">Чемпион США · 2024</div></div>
+    </div>
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-glow gg1"></div>
+        <div class="gallery-glow gg2"></div>
+        <div class="gallery-deco" style="flex-direction:column;gap:1rem;">
+          <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--gold-dim),var(--gold-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:.15">Quad God</div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-caption">«Квад Бог» — рождение легенды</div></div>
+    </div>
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-deco">
+          <div class="gallery-deco-icon" style="font-size:6rem;">🏆</div>
+        </div>
+      </div>
+      <div class="gallery-overlay"><div class="gallery-caption">Финал Гран-при · Турин</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div style="position:relative;z-index:1;">
+    <div class="gold-divider reveal" style="max-width:200px;margin:0 auto 3rem;">
+      <div class="gold-divider-line"></div>
+      <div class="gold-divider-diamond"></div>
+      <div class="gold-divider-line"></div>
+    </div>
+    <blockquote class="quote-text reveal">
+      Я просто катаюсь в своё удовольствие и пробую то, что другие считают невозможным
+    </blockquote>
+    <div class="quote-author reveal" style="margin-top:2rem;">— Илья Малинин</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="section-eyebrow">Статистика</div>
+  <h2 class="section-title reveal">В <em>цифрах</em></h2>
+
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num">1</div>
+      <div class="stat-lbl">В мире с 4A</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">5</div>
+      <div class="stat-lbl">Видов четверных</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">19</div>
+      <div class="stat-lbl">Лет в 2024 году</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num">320+</div>
+      <div class="stat-lbl">Баллов за ПП</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Илья Малинин · Квад Бог</div>
+  <div class="footer-copy">Информационная страница · WebCard Studio</div>
+</footer>
+
+<script>
+  // ── Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(11,7,0,.96)'
+      : 'rgba(11,7,0,.75)';
+  }, { passive: true });
+
+  // ── Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    }),
+    { threshold: 0.1 }
+  );
+  reveals.forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.09 + 's';
+    observer.observe(el);
+  });
+
+  // ── Gold particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+    p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    p.style.animationDelay   = -(Math.random() * 15) + 's';
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
