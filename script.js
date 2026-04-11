@@ -2,8 +2,8 @@
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   nav.style.background = window.scrollY > 60
-    ? 'rgba(8,8,16,.92)'
-    : 'rgba(8,8,16,.6)';
+    ? 'rgba(250,247,242,.97)'
+    : 'rgba(250,247,242,.82)';
 });
 
 // ── REVEAL on scroll
