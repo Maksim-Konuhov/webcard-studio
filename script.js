@@ -25,6 +25,19 @@ reveals.forEach((el, i) => {
   observer.observe(el);
 });
 
+// ── PRICING TABS
+document.querySelectorAll('.price-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.price-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.pricing-panel').forEach(p => p.classList.add('hidden'));
+    document.getElementById('panel-' + target).classList.remove('hidden');
+    // Переинициализировать иконки Lucide в только что показанной панели
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  });
+});
+
 // ── FORM submit mock
 function handleSubmit(e) {
   e.preventDefault();

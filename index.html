@@ -246,55 +246,139 @@
   <h2 class="section-title reveal" style="text-align:center">Прозрачные цены</h2>
   <p class="section-sub reveal" style="text-align:center; margin:0 auto 0">Без скрытых доплат. Платите один раз — сайт ваш навсегда.</p>
 
-  <div class="pricing-grid">
-    <div class="price-card reveal">
-      <div class="price-tier">Одностраничный сайт</div>
-      <div class="price-amount">8 000 ₽</div>
-      <div class="price-period">разовая оплата</div>
-      <ul class="price-features">
-        <li>1 страница (лендинг)</li>
-        <li>Адаптивный дизайн</li>
-        <li>Блок с отзывами <span style="color:var(--muted)">(по желанию)</span></li>
-        <li>Галерея работ</li>
-        <li>SEO-оптимизация</li>
-        <li class="no">Онлайн-запись</li>
-        <li class="no">Форма обратной связи</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center">Заказать</a>
-    </div>
+  <!-- Вкладки -->
+  <div class="price-tabs">
+    <button class="price-tab active" data-tab="main">
+      <i data-lucide="layout"></i> Цены
+    </button>
+    <button class="price-tab" data-tab="extra">
+      <i data-lucide="plus-circle"></i> Доп. услуги
+    </button>
+  </div>
 
-    <div class="price-card featured reveal">
-      <div class="price-badge">Популярный выбор</div>
-      <div class="price-tier">Многостраничный сайт</div>
-      <div class="price-amount">15 000 ₽</div>
-      <div class="price-period">разовая оплата</div>
-      <ul class="price-features">
-        <li>До 6 страниц</li>
-        <li>Адаптивный дизайн</li>
-        <li>Блок с отзывами <span style="color:var(--muted)">(по желанию)</span></li>
-        <li>Галерея работ</li>
-        <li>SEO-оптимизация</li>
-        <li>Онлайн-запись</li>
-        <li>Форма обратной связи</li>
-      </ul>
-      <a href="#contact" class="btn-primary" style="display:block;text-align:center">Заказать</a>
-    </div>
+  <!-- Основные цены -->
+  <div class="pricing-panel" id="panel-main">
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Одностраничный сайт</div>
+        <div class="price-amount">8 000 ₽</div>
+        <div class="price-period">разовая оплата</div>
+        <ul class="price-features">
+          <li>1 страница (лендинг)</li>
+          <li>Адаптивный дизайн</li>
+          <li>Блок с отзывами <span style="color:var(--muted)">(по желанию)</span></li>
+          <li>Галерея работ</li>
+          <li>SEO-оптимизация</li>
+          <li class="no">Онлайн-запись</li>
+          <li class="no">Форма обратной связи</li>
+        </ul>
+        <a href="#contact" class="btn-ghost" style="display:block;text-align:center">Заказать</a>
+      </div>
 
-    <div class="price-card reveal">
-      <div class="price-tier">Большой сайт</div>
-      <div class="price-amount">25 000 ₽</div>
-      <div class="price-period">разовая оплата</div>
-      <ul class="price-features">
-        <li>До 15 страниц</li>
-        <li>Адаптивный дизайн</li>
-        <li>Форма обратной связи</li>
-        <li>Блок с отзывами</li>
-        <li>Онлайн-запись / оплата</li>
-        <li>Каталог / Портфолио</li>
-        <li>SEO + аналитика</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center">Обсудить</a>
+      <div class="price-card featured reveal">
+        <div class="price-badge">Популярный выбор</div>
+        <div class="price-tier">Многостраничный сайт</div>
+        <div class="price-amount">15 000 ₽</div>
+        <div class="price-period">разовая оплата</div>
+        <ul class="price-features">
+          <li>До 6 страниц</li>
+          <li>Адаптивный дизайн</li>
+          <li>Блок с отзывами <span style="color:var(--muted)">(по желанию)</span></li>
+          <li>Галерея работ</li>
+          <li>SEO-оптимизация</li>
+          <li>Онлайн-запись</li>
+          <li>Форма обратной связи</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:block;text-align:center">Заказать</a>
+      </div>
+
+      <div class="price-card reveal">
+        <div class="price-tier">Большой сайт</div>
+        <div class="price-amount">25 000 ₽</div>
+        <div class="price-period">разовая оплата</div>
+        <ul class="price-features">
+          <li>До 15 страниц</li>
+          <li>Адаптивный дизайн</li>
+          <li>Форма обратной связи</li>
+          <li>Блок с отзывами</li>
+          <li>Онлайн-запись / оплата</li>
+          <li>Каталог / Портфолио</li>
+          <li>SEO + аналитика</li>
+        </ul>
+        <a href="#contact" class="btn-ghost" style="display:block;text-align:center">Обсудить</a>
+      </div>
     </div>
+  </div>
+
+  <!-- Дополнительные услуги -->
+  <div class="pricing-panel hidden" id="panel-extra">
+    <div class="extra-grid">
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="globe"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Домен + хостинг</div>
+          <div class="extra-desc">Подключение, настройка и запуск сайта на хостинге</div>
+        </div>
+        <div class="extra-price">2 000 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="pen-tool"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Логотип</div>
+          <div class="extra-desc">Фирменный логотип в нескольких форматах</div>
+        </div>
+        <div class="extra-price">3 000 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="file-text"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Написание текстов</div>
+          <div class="extra-desc">Продающие тексты для всех блоков сайта</div>
+        </div>
+        <div class="extra-price">2 500 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="instagram"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Интеграция соцсетей</div>
+          <div class="extra-desc">Виджет Instagram, ВКонтакте или Telegram</div>
+        </div>
+        <div class="extra-price">1 500 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="bar-chart-2"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Яндекс.Метрика</div>
+          <div class="extra-desc">Настройка аналитики и отслеживания целей</div>
+        </div>
+        <div class="extra-price">1 000 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="image"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Обработка фото</div>
+          <div class="extra-desc">Ретушь и оптимизация изображений для сайта</div>
+        </div>
+        <div class="extra-price">1 500 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="refresh-cw"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Правки после сдачи</div>
+          <div class="extra-desc">Любые изменения контента или дизайна</div>
+        </div>
+        <div class="extra-price">от 500 ₽</div>
+      </div>
+      <div class="extra-card reveal">
+        <div class="extra-icon"><i data-lucide="move"></i></div>
+        <div class="extra-info">
+          <div class="extra-name">Перенос сайта</div>
+          <div class="extra-desc">Перенос готового сайта на новый хостинг</div>
+        </div>
+        <div class="extra-price">2 000 ₽</div>
+      </div>
+    </div>
+    <p class="extra-note">Все услуги можно добавить к любому тарифу. Уточняйте детали при заказе.</p>
   </div>
 </section>
 

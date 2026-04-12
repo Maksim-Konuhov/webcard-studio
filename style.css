@@ -465,6 +465,88 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 /* ── PRICING ── */
 #pricing { background: var(--bg); }
 
+/* Вкладки */
+.price-tabs {
+  display: flex;
+  gap: .6rem;
+  margin: 2rem 0 0;
+}
+.price-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .55rem 1.3rem;
+  border-radius: 50px;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  transition: all .25s;
+}
+.price-tab svg { width: .9rem; height: .9rem; }
+.price-tab.active {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(168,85,247,.35);
+}
+.price-tab:not(.active):hover { border-color: var(--accent1); color: var(--text); }
+
+/* Панели */
+.pricing-panel { margin-top: 2.5rem; }
+.pricing-panel.hidden { display: none; }
+
+/* Доп. услуги */
+.extra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.extra-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: transform .25s, border-color .25s;
+}
+.extra-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,.4); }
+.extra-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(168,85,247,.12);
+  color: #a855f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.extra-icon svg { width: 1.2rem; height: 1.2rem; }
+.extra-info { flex: 1; }
+.extra-name { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
+.extra-desc { font-size: .78rem; color: var(--muted); line-height: 1.4; }
+.extra-price {
+  font-family: 'Unbounded', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  flex-shrink: 0;
+}
+.extra-note {
+  margin-top: 1.5rem;
+  font-size: .8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -887,6 +969,13 @@ footer {
   .price-amount { font-size: 2.2rem; }
   .price-period { margin-bottom: 1.2rem; }
   .price-features { margin-bottom: 1.5rem; }
+
+  /* ── PRICING TABS mobile ── */
+  .price-tabs { gap: .5rem; margin: 1.2rem 0 0; }
+  .price-tab { padding: .45rem 1rem; font-size: .72rem; }
+  .extra-grid { grid-template-columns: 1fr; gap: .7rem; }
+  .extra-card { padding: .9rem 1rem; }
+  .pricing-panel { margin-top: 1.2rem; }
 
   /* ── CONTACT mobile ── */
   .contact-wrap {
