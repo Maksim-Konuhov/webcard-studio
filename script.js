@@ -50,6 +50,23 @@ document.querySelectorAll('.price-tab').forEach(btn => {
   });
 });
 
+// ── PAGES SLIDER
+function togglePagesSlider(cb) {
+  const wrap = document.getElementById('pages-slider-wrap');
+  if (wrap) wrap.classList.toggle('visible', cb.checked);
+  updateTotal();
+}
+function updatePagesSlider(slider) {
+  const n = parseInt(slider.value);
+  const count = document.getElementById('pages-count');
+  const label = document.getElementById('pages-price-label');
+  if (count) count.textContent = n;
+  if (label) label.textContent = '+ ' + (n * 2000).toLocaleString('ru-RU') + ' ₽';
+  // update slider gradient fill
+  slider.style.background = `linear-gradient(90deg, var(--accent1) ${(n-1)/9*100}%, rgba(255,255,255,0.1) ${(n-1)/9*100}%)`;
+  updateTotal();
+}
+
 // ── NICHE "Другое" toggle
 function toggleOtherNiche(sel) {
   const wrap = document.getElementById('other-niche-wrap');
@@ -60,10 +77,19 @@ function toggleOtherNiche(sel) {
 function updateTotal() {
   const serviceInput = document.querySelector('input[name="service"]:checked');
   const base = serviceInput ? parseInt(serviceInput.value) : 0;
+
   let addons = 0;
-  document.querySelectorAll('.addon-item input:checked').forEach(cb => {
+  // обычные чекбоксы (кроме слайдера страниц)
+  document.querySelectorAll('.addon-item input[type="checkbox"]:checked:not(#pages-check)').forEach(cb => {
     addons += parseInt(cb.value);
   });
+  // страницы через слайдер
+  const pagesCheck = document.getElementById('pages-check');
+  const pagesSlider = document.getElementById('pages-slider');
+  if (pagesCheck && pagesCheck.checked && pagesSlider) {
+    addons += parseInt(pagesSlider.value) * 2000;
+  }
+
   const total = base + addons;
   const el = document.getElementById('price-total');
   const amt = document.getElementById('total-amount');

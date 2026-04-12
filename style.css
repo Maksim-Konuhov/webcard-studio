@@ -871,6 +871,69 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 .addon-name { flex: 1; font-size: .85rem; color: var(--muted); transition: color .2s; }
 .addon-price { font-size: .78rem; font-weight: 700; color: var(--accent1); white-space: nowrap; }
 
+/* Слайдер страниц */
+.addon-pages-wrap {
+  flex-direction: column;
+  align-items: stretch;
+  gap: .6rem;
+  cursor: default;
+}
+.addon-item-row {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  cursor: pointer;
+}
+.addon-item-row input { display: none; }
+.addon-item-row input:checked ~ .addon-check {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  border-color: transparent;
+  color: #fff;
+}
+.pages-slider-wrap {
+  display: none;
+  flex-direction: column;
+  gap: .5rem;
+  padding: .4rem .2rem 0;
+}
+.pages-slider-wrap.visible { display: flex; }
+.pages-slider-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: .8rem;
+  color: var(--muted);
+}
+.pages-slider-info strong {
+  color: var(--accent1);
+  font-size: 1rem;
+  font-family: 'Unbounded', sans-serif;
+}
+input[type="range"]#pages-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent1) 0%, var(--border) 0%);
+  outline: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+input[type="range"]#pages-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  box-shadow: 0 0 8px rgba(168,85,247,.6);
+  cursor: pointer;
+}
+.pages-slider-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: .7rem;
+  color: var(--muted);
+}
+
 /* Итоговая цена */
 .price-total {
   display: flex;

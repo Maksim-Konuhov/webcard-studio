@@ -531,12 +531,24 @@
       <div class="form-field">
         <label>Дополнительные услуги <span style="color:var(--muted);font-weight:400">(по желанию)</span></label>
         <div class="addon-list">
-          <label class="addon-item">
-            <input type="checkbox" value="2000" onchange="updateTotal()" />
-            <span class="addon-check"><i data-lucide="check"></i></span>
-            <span class="addon-name">Добавить страницу</span>
-            <span class="addon-price">+ 2 000 ₽</span>
-          </label>
+          <div class="addon-item addon-pages-wrap">
+            <label class="addon-item-row">
+              <input type="checkbox" id="pages-check" onchange="togglePagesSlider(this)" />
+              <span class="addon-check"><i data-lucide="check"></i></span>
+              <span class="addon-name">Добавить страницы</span>
+              <span class="addon-price" id="pages-price-label">+ 2 000 ₽</span>
+            </label>
+            <div class="pages-slider-wrap" id="pages-slider-wrap">
+              <div class="pages-slider-info">
+                <span>Количество страниц:</span>
+                <strong id="pages-count">1</strong>
+              </div>
+              <input type="range" id="pages-slider" min="1" max="10" value="1" oninput="updatePagesSlider(this)" />
+              <div class="pages-slider-scale">
+                <span>1</span><span>5</span><span>10</span>
+              </div>
+            </div>
+          </div>
           <label class="addon-item">
             <input type="checkbox" value="1000" onchange="updateTotal()" />
             <span class="addon-check"><i data-lucide="check"></i></span>
