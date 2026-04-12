@@ -504,6 +504,7 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
+  align-items: start;
 }
 .extra-grid .price-amount {
   font-size: clamp(1.1rem, 2vw, 1.8rem);
