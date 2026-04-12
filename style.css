@@ -505,6 +505,10 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
+.extra-grid .price-amount {
+  font-size: clamp(1.1rem, 2vw, 1.8rem);
+}
+
 .extra-card-icon {
   width: 48px; height: 48px;
   border-radius: 14px;
