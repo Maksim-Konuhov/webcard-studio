@@ -1212,13 +1212,35 @@ footer {
   /* ── CONTACT mobile ── */
   .contact-wrap {
     grid-template-columns: 1fr;
-    gap: 1.4rem;
-    margin-top: 1.2rem;
+    gap: 1.2rem;
+    margin-top: 1rem;
   }
-  .contact-links { margin-top: 0; gap: 0.7rem; }
-  .contact-link { padding: 0.9rem 1.1rem; border-radius: 14px; }
-  .form-row { grid-template-columns: 1fr; }
-  .contact-form { gap: 0.8rem; }
+  .contact-links { margin-top: 0; gap: 0.6rem; }
+  .contact-link { padding: 0.75rem 1rem; border-radius: 12px; }
+  .contact-link-icon { width: 36px; height: 36px; border-radius: 10px; }
+
+  .form-row { grid-template-columns: 1fr; gap: .6rem; }
+  .contact-form { gap: 0.7rem; }
+  .form-field label { font-size: .72rem; }
+  .form-field input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  .form-field select,
+  .form-field textarea { font-size: .88rem; padding: .7rem .9rem; }
+
+  /* Тарифы — в 1 колонку на маленьких, 3 колонки остаются если места хватает */
+  .service-radio-grid { grid-template-columns: repeat(3,1fr); gap: .4rem; }
+  .service-radio-card { padding: .6rem .4rem; }
+  .sr-name { font-size: .62rem; }
+  .sr-price { font-size: .72rem; }
+
+  /* Доп. услуги */
+  .addon-item { padding: .6rem .8rem; gap: .6rem; }
+  .addon-name { font-size: .78rem; }
+  .addon-price { font-size: .72rem; }
+
+  /* Итого */
+  .price-total { padding: .8rem 1rem; }
+  .price-total-label { font-size: .7rem; }
+  .price-total-amount { font-size: 1.1rem; }
 
   /* ── BOTTOM TAB BAR ── */
   #mobile-nav {
