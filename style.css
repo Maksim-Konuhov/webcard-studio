@@ -552,12 +552,18 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 }
 
 .support-desc {
-  font-size: .85rem;
+  font-size: .82rem;
   color: var(--muted);
   line-height: 1.7;
-  margin-bottom: 1.8rem;
-  flex: 1;
+  margin-bottom: 1.2rem;
 }
+.support-tiers li {
+  white-space: normal;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.support-tiers li::before { content: '→'; color: var(--accent1); font-weight: 700; }
+.support-tiers strong { color: var(--text); font-weight: 700; }
 
 .extra-note {
   margin-top: 1.5rem;
