@@ -508,9 +508,9 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 }
 
 .price-tier {
-  font-size: .8rem;
+  font-size: .72rem;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--accent1);
   margin-bottom: 1rem;
