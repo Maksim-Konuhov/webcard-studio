@@ -811,6 +811,88 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 }
 .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(168,85,247,.4); }
 
+/* Выбор тарифа */
+.service-radio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .6rem;
+}
+.service-radio { cursor: pointer; }
+.service-radio input { display: none; }
+.service-radio-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .8rem .7rem;
+  text-align: center;
+  transition: border-color .2s, background .2s;
+}
+.service-radio input:checked + .service-radio-card {
+  border-color: var(--accent1);
+  background: rgba(168,85,247,.1);
+}
+.service-radio-card:hover { border-color: rgba(168,85,247,.5); }
+.sr-name { font-size: .72rem; font-weight: 600; color: var(--muted); margin-bottom: .3rem; }
+.sr-price { font-family: 'Unbounded', sans-serif; font-size: .82rem; font-weight: 700; white-space: nowrap; background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Доп. услуги чекбоксы */
+.addon-list { display: flex; flex-direction: column; gap: .5rem; }
+.addon-item {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .7rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.addon-item:hover { border-color: rgba(168,85,247,.4); }
+.addon-item input { display: none; }
+.addon-check {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .2s, border-color .2s;
+  color: transparent;
+}
+.addon-check svg { width: .75rem; height: .75rem; }
+.addon-item input:checked ~ .addon-check {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  border-color: transparent;
+  color: #fff;
+}
+.addon-item input:checked ~ .addon-name { color: var(--text); }
+.addon-item input:checked + .addon-check + .addon-name { color: var(--text); }
+.addon-name { flex: 1; font-size: .85rem; color: var(--muted); transition: color .2s; }
+.addon-price { font-size: .78rem; font-weight: 700; color: var(--accent1); white-space: nowrap; }
+
+/* Итоговая цена */
+.price-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  background: linear-gradient(135deg, rgba(168,85,247,.12), rgba(236,72,153,.1));
+  border: 1px solid rgba(168,85,247,.3);
+  border-radius: 14px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s, transform .35s;
+  pointer-events: none;
+}
+.price-total.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.price-total-label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.price-total-amount { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; font-weight: 900; background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
 /* ── FOOTER ── */
 footer {
   padding: 3rem 6vw;

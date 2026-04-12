@@ -465,6 +465,8 @@
     </div>
 
     <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+
+      <!-- Имя + телефон -->
       <div class="form-row">
         <div class="form-field">
           <label>Ваше имя</label>
@@ -475,9 +477,11 @@
           <input type="text" placeholder="+7 900 000-00-00" required />
         </div>
       </div>
+
+      <!-- Ниша -->
       <div class="form-field">
         <label>Ваша ниша</label>
-        <select>
+        <select id="niche-select" onchange="toggleOtherNiche(this)">
           <option value="" disabled selected>Выберите нишу</option>
           <option>Маникюр / Педикюр</option>
           <option>Барбершоп</option>
@@ -487,13 +491,91 @@
           <option>Фотограф</option>
           <option>Массаж / СПА</option>
           <option>Репетитор</option>
-          <option>Другое</option>
+          <option value="other">Другое</option>
         </select>
       </div>
+      <div class="form-field" id="other-niche-wrap" style="display:none">
+        <label>Напишите чем вы занимаетесь</label>
+        <input type="text" placeholder="Например: студия йоги, nail-бар, детский центр..." />
+      </div>
+
+      <!-- Выбор тарифа -->
+      <div class="form-field">
+        <label>Что заказываете</label>
+        <div class="service-radio-grid">
+          <label class="service-radio">
+            <input type="radio" name="service" value="8000" onchange="updateTotal()" />
+            <div class="service-radio-card">
+              <div class="sr-name">Одностраничный</div>
+              <div class="sr-price">8 000 ₽</div>
+            </div>
+          </label>
+          <label class="service-radio">
+            <input type="radio" name="service" value="15000" onchange="updateTotal()" />
+            <div class="service-radio-card">
+              <div class="sr-name">Многостраничный</div>
+              <div class="sr-price">15 000 ₽</div>
+            </div>
+          </label>
+          <label class="service-radio">
+            <input type="radio" name="service" value="25000" onchange="updateTotal()" />
+            <div class="service-radio-card">
+              <div class="sr-name">Большой сайт</div>
+              <div class="sr-price">25 000 ₽</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Доп. услуги -->
+      <div class="form-field">
+        <label>Дополнительные услуги <span style="color:var(--muted);font-weight:400">(по желанию)</span></label>
+        <div class="addon-list">
+          <label class="addon-item">
+            <input type="checkbox" value="2000" onchange="updateTotal()" />
+            <span class="addon-check"><i data-lucide="check"></i></span>
+            <span class="addon-name">Добавить страницу</span>
+            <span class="addon-price">+ 2 000 ₽</span>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" value="1000" onchange="updateTotal()" />
+            <span class="addon-check"><i data-lucide="check"></i></span>
+            <span class="addon-name">Поддержка сайта</span>
+            <span class="addon-price">от 1 000 ₽/мес</span>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" value="3500" onchange="updateTotal()" />
+            <span class="addon-check"><i data-lucide="check"></i></span>
+            <span class="addon-name">Онлайн-запись (Telegram-бот)</span>
+            <span class="addon-price">+ 3 500 ₽</span>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" value="2500" onchange="updateTotal()" />
+            <span class="addon-check"><i data-lucide="check"></i></span>
+            <span class="addon-name">Регистрация на сайте</span>
+            <span class="addon-price">+ 2 500 ₽</span>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" value="3500" onchange="updateTotal()" />
+            <span class="addon-check"><i data-lucide="check"></i></span>
+            <span class="addon-name">Админ-панель</span>
+            <span class="addon-price">от 3 500 ₽</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Комментарий -->
       <div class="form-field">
         <label>Комментарий</label>
         <textarea placeholder="Расскажите о вашем бизнесе и пожеланиях..."></textarea>
       </div>
+
+      <!-- Итого -->
+      <div class="price-total" id="price-total">
+        <div class="price-total-label">Итоговая стоимость</div>
+        <div class="price-total-amount" id="total-amount">0 ₽</div>
+      </div>
+
       <button type="submit" class="form-submit">Отправить заявку →</button>
     </form>
   </div>

@@ -50,6 +50,29 @@ document.querySelectorAll('.price-tab').forEach(btn => {
   });
 });
 
+// ── NICHE "Другое" toggle
+function toggleOtherNiche(sel) {
+  const wrap = document.getElementById('other-niche-wrap');
+  if (wrap) wrap.style.display = sel.value === 'other' ? 'flex' : 'none';
+}
+
+// ── PRICE CALCULATOR
+function updateTotal() {
+  const serviceInput = document.querySelector('input[name="service"]:checked');
+  const base = serviceInput ? parseInt(serviceInput.value) : 0;
+  let addons = 0;
+  document.querySelectorAll('.addon-item input:checked').forEach(cb => {
+    addons += parseInt(cb.value);
+  });
+  const total = base + addons;
+  const el = document.getElementById('price-total');
+  const amt = document.getElementById('total-amount');
+  if (el && amt) {
+    amt.textContent = total.toLocaleString('ru-RU') + ' ₽';
+    el.classList.toggle('visible', total > 0);
+  }
+}
+
 // ── FORM submit mock
 function handleSubmit(e) {
   e.preventDefault();
