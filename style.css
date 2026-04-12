@@ -520,6 +520,14 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   margin-bottom: 1.4rem;
 }
 .extra-card-icon svg { width: 1.4rem; height: 1.4rem; }
+.support-desc {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.8rem;
+  flex: 1;
+}
+
 .extra-note {
   margin-top: 1.5rem;
   font-size: .8rem;
