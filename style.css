@@ -520,6 +520,13 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   margin-bottom: 1.4rem;
 }
 .extra-card-icon svg { width: 1.4rem; height: 1.4rem; }
+/* Карточки доп. услуг — разрешить перенос текста */
+.extra-grid .price-features li {
+  white-space: normal;
+  align-items: flex-start;
+}
+.extra-grid .price-card { overflow: hidden; }
+
 /* Пошаговый список онлайн-записи */
 .booking-features li {
   align-items: flex-start;
