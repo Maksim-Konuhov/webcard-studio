@@ -502,44 +502,20 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 /* Доп. услуги */
 .extra-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
-.extra-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem 1.4rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: transform .25s, border-color .25s;
-}
-.extra-card:hover { transform: translateY(-3px); border-color: rgba(168,85,247,.4); }
-.extra-icon {
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  background: rgba(168,85,247,.12);
+.extra-card-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(168,85,247,.2), rgba(236,72,153,.15));
   color: #a855f7;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin-bottom: 1.4rem;
 }
-.extra-icon svg { width: 1.2rem; height: 1.2rem; }
-.extra-info { flex: 1; }
-.extra-name { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-.extra-desc { font-size: .78rem; color: var(--muted); line-height: 1.4; }
-.extra-price {
-  font-family: 'Unbounded', sans-serif;
-  font-size: .9rem;
-  font-weight: 700;
-  white-space: nowrap;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  flex-shrink: 0;
-}
+.extra-card-icon svg { width: 1.4rem; height: 1.4rem; }
 .extra-note {
   margin-top: 1.5rem;
   font-size: .8rem;
@@ -973,8 +949,7 @@ footer {
   /* ── PRICING TABS mobile ── */
   .price-tabs { gap: .5rem; margin: 1.2rem 0 0; }
   .price-tab { padding: .45rem 1rem; font-size: .72rem; }
-  .extra-grid { grid-template-columns: 1fr; gap: .7rem; }
-  .extra-card { padding: .9rem 1rem; }
+  .extra-grid { grid-template-columns: 1fr; gap: 1rem; }
   .pricing-panel { margin-top: 1.2rem; }
 
   /* ── CONTACT mobile ── */
