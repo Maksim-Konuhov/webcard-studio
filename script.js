@@ -25,10 +25,15 @@ reveals.forEach((el, i) => {
   observer.observe(el);
 });
 
-// ── EXTRA CARDS EXPAND/COLLAPSE
+// ── EXTRA CARDS EXPAND/COLLAPSE (только одна открыта)
 document.querySelectorAll('.extra-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
-    btn.closest('.extra-collapsible').classList.toggle('open');
+    const card = btn.closest('.extra-collapsible');
+    const isOpen = card.classList.contains('open');
+    // закрыть все
+    document.querySelectorAll('.extra-collapsible').forEach(c => c.classList.remove('open'));
+    // открыть кликнутую, если она была закрыта
+    if (!isOpen) card.classList.add('open');
   });
 });
 
