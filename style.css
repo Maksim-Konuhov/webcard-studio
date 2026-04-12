@@ -525,7 +525,43 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   white-space: normal;
   align-items: flex-start;
 }
-.extra-grid .price-card { overflow: hidden; }
+
+/* Сворачиваемые карточки */
+.extra-collapsible {
+  position: relative;
+  overflow: hidden;
+}
+.extra-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+  opacity: 0;
+}
+.extra-collapsible.open .extra-body {
+  max-height: 700px;
+  opacity: 1;
+}
+.extra-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--accent1);
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background .25s, transform .35s, border-color .25s;
+}
+.extra-toggle svg { width: 1rem; height: 1rem; }
+.extra-toggle:hover { background: rgba(168,85,247,.12); border-color: var(--accent1); }
+.extra-collapsible.open .extra-toggle {
+  transform: rotate(45deg);
+  background: rgba(168,85,247,.15);
+  border-color: var(--accent1);
+}
 
 /* Пошаговый список онлайн-записи */
 .booking-features li {

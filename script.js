@@ -25,6 +25,13 @@ reveals.forEach((el, i) => {
   observer.observe(el);
 });
 
+// ── EXTRA CARDS EXPAND/COLLAPSE
+document.querySelectorAll('.extra-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.extra-collapsible').classList.toggle('open');
+  });
+});
+
 // ── PRICING TABS
 document.querySelectorAll('.price-tab').forEach(btn => {
   btn.addEventListener('click', () => {
