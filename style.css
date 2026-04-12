@@ -775,7 +775,7 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 }
 .form-field label { font-size: .8rem; font-weight: 600; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
 
-.form-field input,
+.form-field input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
 .form-field select,
 .form-field textarea {
   background: var(--card);
@@ -789,7 +789,7 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   transition: border-color .2s;
   width: 100%;
 }
-.form-field input:focus,
+.form-field input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,
 .form-field select:focus,
 .form-field textarea:focus { border-color: var(--accent1); }
 
@@ -910,22 +910,40 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 }
 input[type="range"]#pages-slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
-  height: 4px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent1) 0%, var(--border) 0%);
+  height: 6px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
   outline: none;
-  border: none;
-  padding: 0;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
+  margin: .4rem 0;
 }
 input[type="range"]#pages-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px; height: 18px;
+  appearance: none;
+  width: 22px; height: 22px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  box-shadow: 0 0 8px rgba(168,85,247,.6);
+  box-shadow: 0 0 12px rgba(168,85,247,.7);
   cursor: pointer;
+  border: 2px solid rgba(255,255,255,.2);
+}
+input[type="range"]#pages-slider::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  box-shadow: 0 0 12px rgba(168,85,247,.7);
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,.2);
+}
+input[type="range"]#pages-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
 }
 .pages-slider-scale {
   display: flex;
