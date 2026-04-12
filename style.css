@@ -520,6 +520,7 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   font-family: 'Unbounded', sans-serif;
   font-size: 3rem;
   font-weight: 900;
+  white-space: nowrap;
   line-height: 1;
   margin-bottom: .3rem;
 }
