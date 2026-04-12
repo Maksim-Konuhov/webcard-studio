@@ -330,13 +330,27 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
 .niche-card:hover::before { opacity: 1; }
 
 .niche-emoji {
-  font-size: 2.8rem;
+  width: 3rem;
+  height: 3rem;
   margin-bottom: 1.2rem;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   filter: drop-shadow(0 0 12px rgba(255,255,255,.15));
   transition: transform .3s;
 }
+.niche-emoji svg { width: 2.6rem; height: 2.6rem; }
 .niche-card:hover .niche-emoji { transform: scale(1.15) rotate(-5deg); }
+
+/* niche-emoji icon colour per card */
+.c1 .niche-emoji { color: #a855f7; }
+.c2 .niche-emoji { color: #ec4899; }
+.c3 .niche-emoji { color: #f97316; }
+.c4 .niche-emoji { color: #a855f7; }
+.c5 .niche-emoji { color: #ec4899; }
+.c6 .niche-emoji { color: #f97316; }
+.c7 .niche-emoji { color: #a855f7; }
+.c8 .niche-emoji { color: #ec4899; }
 
 .niche-name {
   font-family: 'Unbounded', sans-serif;
@@ -435,15 +449,15 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   margin-bottom: 1.2rem;
 }
-.wi1 { background: rgba(168,85,247,.15); }
-.wi2 { background: rgba(236,72,153,.15); }
-.wi3 { background: rgba(249,115,22,.12); }
-.wi4 { background: rgba(168,85,247,.15); }
-.wi5 { background: rgba(236,72,153,.1); }
-.wi6 { background: rgba(249,115,22,.12); }
+.why-icon svg { width: 1.4rem; height: 1.4rem; }
+.wi1 { background: rgba(168,85,247,.15); color: #a855f7; }
+.wi2 { background: rgba(236,72,153,.15); color: #ec4899; }
+.wi3 { background: rgba(249,115,22,.12); color: #f97316; }
+.wi4 { background: rgba(168,85,247,.15); color: #a855f7; }
+.wi5 { background: rgba(236,72,153,.1);  color: #ec4899; }
+.wi6 { background: rgba(249,115,22,.12); color: #f97316; }
 
 .why-title { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
 .why-desc { color: var(--muted); font-size: .9rem; line-height: 1.65; }
@@ -841,7 +855,8 @@ footer {
     margin-top: 1.2rem;
   }
   .niche-card { padding: 1.1rem 0.9rem; border-radius: 16px; }
-  .niche-emoji { font-size: 1.9rem; margin-bottom: 0.5rem; }
+  .niche-emoji { width: 2rem; height: 2rem; margin-bottom: 0.5rem; }
+  .niche-emoji svg { width: 1.7rem; height: 1.7rem; }
   .niche-name { font-size: 0.76rem; margin-bottom: 0.2rem; }
   .niche-desc { display: none; }
   .niche-tag { font-size: 0.6rem; padding: 0.18rem 0.55rem; margin-top: 0.5rem; }
@@ -941,7 +956,8 @@ footer {
     background: rgba(168,85,247,0.15);
     transform: translateY(-3px);
   }
-  .tab-icon { font-size: 1.2rem; line-height: 1; }
+  .tab-icon { display: flex; align-items: center; justify-content: center; }
+  .tab-icon svg { width: 1.2rem; height: 1.2rem; }
   .tab-label {
     font-size: 0.58rem;
     font-weight: 700;
