@@ -558,9 +558,9 @@ section { padding: 100px 6vw; position: relative; z-index: 1; }
   margin-bottom: 1.2rem;
 }
 .support-tiers li {
-  white-space: normal;
+  white-space: nowrap;
   color: var(--muted);
-  font-size: .82rem;
+  font-size: .78rem;
 }
 .support-tiers li::before { content: '→'; color: var(--accent1); font-weight: 700; }
 .support-tiers strong { color: var(--text); font-weight: 700; }
