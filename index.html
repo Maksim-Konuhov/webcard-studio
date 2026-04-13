@@ -452,18 +452,18 @@
       <div class="form-row">
         <div class="form-field">
           <label>Ваше имя</label>
-          <input type="text" placeholder="Алексей" required />
+          <input type="text" name="client_name" placeholder="Алексей" required />
         </div>
         <div class="form-field">
-          <label>Телефон / Telegram</label>
-          <input type="text" placeholder="+7 900 000-00-00" required />
+          <label>Телефон / Telegram / Instagram</label>
+          <input type="text" name="client_contact" placeholder="+7 900 000-00-00" required />
         </div>
       </div>
 
       <!-- Ниша -->
       <div class="form-field">
         <label>Ваша ниша</label>
-        <select id="niche-select" onchange="toggleOtherNiche(this)">
+        <select id="niche-select" name="niche" onchange="toggleOtherNiche(this)">
           <option value="" disabled selected>Выберите нишу</option>
           <option>Маникюр / Педикюр</option>
           <option>Барбершоп</option>
@@ -478,7 +478,7 @@
       </div>
       <div class="form-field" id="other-niche-wrap" style="display:none">
         <label>Напишите чем вы занимаетесь</label>
-        <input type="text" placeholder="Например: студия йоги, nail-бар, детский центр..." />
+        <input type="text" name="other_niche" placeholder="Например: студия йоги, nail-бар, детский центр..." />
       </div>
 
       <!-- Выбор тарифа -->
@@ -561,7 +561,7 @@
       <!-- Комментарий -->
       <div class="form-field">
         <label>Комментарий</label>
-        <textarea placeholder="Расскажите о вашем бизнесе и пожеланиях..."></textarea>
+        <textarea name="comment" placeholder="Расскажите о вашем бизнесе и пожеланиях..."></textarea>
       </div>
 
       <!-- Итого -->

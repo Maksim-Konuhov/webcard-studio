@@ -99,10 +99,88 @@ function updateTotal() {
   }
 }
 
-// ── FORM submit mock
+// ── TELEGRAM BOT
+const TG_TOKEN = '8688912774:AAGs_jMGiedIQxHmhIAkaM8uXKu__ZvW5CM';
+
+async function getTgChatId() {
+  const cached = localStorage.getItem('tg_chat_id');
+  if (cached) return cached;
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/getUpdates?limit=20&allowed_updates=["message"]`);
+    const data = await res.json();
+    if (data.ok && data.result.length > 0) {
+      const chatId = String(data.result[data.result.length - 1].message.chat.id);
+      localStorage.setItem('tg_chat_id', chatId);
+      return chatId;
+    }
+  } catch (_) {}
+  return null;
+}
+
+async function sendTgMessage(text) {
+  const chatId = await getTgChatId();
+  if (!chatId) return;
+  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' })
+  });
+}
+
+// ── FORM submit
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+
+  // Collect data
+  const name    = (form.querySelector('[name="client_name"]')?.value || '').trim();
+  const contact = (form.querySelector('[name="client_contact"]')?.value || '').trim();
+  const nicheEl = form.querySelector('[name="niche"]');
+  let niche = nicheEl ? nicheEl.value : '';
+  if (niche === 'other') {
+    niche = (form.querySelector('[name="other_niche"]')?.value || '').trim() || 'Другое';
+  }
+  const comment = (form.querySelector('[name="comment"]')?.value || '').trim();
+
+  // Service
+  const serviceInput = form.querySelector('input[name="service"]:checked');
+  const serviceCard  = serviceInput ? serviceInput.closest('.service-radio')?.querySelector('.sr-name')?.textContent : null;
+  const servicePrice = serviceInput ? parseInt(serviceInput.value) : 0;
+
+  // Addons
+  const addonNames = [];
+  form.querySelectorAll('.addon-item input[type="checkbox"]:checked').forEach(cb => {
+    const lbl = cb.closest('label, .addon-item')?.querySelector('.addon-name')?.textContent?.trim();
+    if (lbl) {
+      if (cb.id === 'pages-check') {
+        const n = form.querySelector('#pages-slider')?.value || 1;
+        addonNames.push(`${lbl} (${n} шт.)`);
+      } else {
+        addonNames.push(lbl);
+      }
+    }
+  });
+
+  // Total
+  const totalEl = document.getElementById('total-amount');
+  const total = totalEl ? totalEl.textContent : '—';
+
+  // Build message
+  const lines = [
+    '📬 <b>Новая заявка с сайта!</b>',
+    '',
+    `👤 <b>Имя:</b> ${name || '—'}`,
+    `📞 <b>Контакт:</b> ${contact || '—'}`,
+    `🏷 <b>Ниша:</b> ${niche || '—'}`,
+    `💼 <b>Тариф:</b> ${serviceCard || '—'} ${servicePrice ? '(' + servicePrice.toLocaleString('ru-RU') + ' ₽)' : ''}`,
+    addonNames.length ? `➕ <b>Доп. услуги:</b> ${addonNames.join(', ')}` : null,
+    `💰 <b>Итого:</b> ${total}`,
+    comment ? `💬 <b>Комментарий:</b> ${comment}` : null,
+  ].filter(l => l !== null).join('\n');
+
+  sendTgMessage(lines);
+
   btn.textContent = '✓ Заявка отправлена!';
   btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
   btn.disabled = true;
@@ -110,7 +188,10 @@ function handleSubmit(e) {
     btn.textContent = 'Отправить заявку →';
     btn.style.background = '';
     btn.disabled = false;
-    e.target.reset();
+    form.reset();
+    document.getElementById('price-total')?.classList.remove('visible');
+    const wrap = document.getElementById('pages-slider-wrap');
+    if (wrap) wrap.classList.remove('visible');
   }, 3500);
 }
 
